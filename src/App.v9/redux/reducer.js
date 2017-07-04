@@ -1,5 +1,4 @@
 import * as Actions from './actions';
-import _ from 'lodash';
 
 const defaultState = {
   projects: [],
@@ -21,11 +20,11 @@ export default (state = defaultState, action) => {
     case Actions.ADD_TECHS:
       return { ...state, technologies: payload };
     case Actions.USER_SELECT_PROJECT:
-      return { ...state, selectedProject: _.find(state.projects, ['id', payload]) };
+      return { ...state, selectedProject: payload };
     case Actions.USER_SELECT_EMPLOYEE:
-      return { ...state, selectedEmployee: _.find(state.employees, ['id', payload]) };
+      return { ...state, selectedEmployee: payload };
     case Actions.USER_SELECT_TECH:
-      return { ...state, selectedTechnology: _.find(state.technologies, ['id', payload]) };
+      return { ...state, selectedTechnology: payload };
     case Actions.USER_CLOSE_PROJECT:
       return { ...state, selectedProject: null };
     case Actions.USER_CLOSE_EMPLOYEE:

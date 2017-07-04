@@ -57,7 +57,7 @@ const Project = ({
     </div>
   );
 
-const Employee = ({ onCloseEmployee }) => (
+const Employee = ({ onCloseEmployee, onSelectTechnology }) => (
   <div>
     <a
       href="#"
@@ -67,7 +67,7 @@ const Employee = ({ onCloseEmployee }) => (
         </a>
     <h1>Adam</h1>
     <hr />
-    <TechnologyList />
+    <TechnologyList onSelectTechnology={onSelectTechnology} />
   </div>
 );
 
@@ -118,33 +118,22 @@ class Projects extends Component {
 }
 
 class Technologies extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { selected: false };
-    this.onSelectTechnology = this.onSelectTechnology.bind(this);
-    this.onCloseTechnology = this.onCloseTechnology.bind(this);
-  }
-
-  onSelectTechnology() {
-    this.setState({ selected: true });
-  }
-
-  onCloseTechnology() {
-    this.setState({ selected: false });
-  }
-
   render() {
+    const {
+      onSelectTechnology,
+      onCloseTechnology,
+      selected
+    } = this.props;
     return (
       <div>
         <h1>
           Technologies
         </h1>
-        {!this.state.selected && <TechnologyList
-          onSelectTechnology={this.onSelectTechnology}
+        {!selected && <TechnologyList
+          onSelectTechnology={onSelectTechnology}
         />}
-        {this.state.selected && <Technology
-          onCloseTechnology={this.onCloseTechnology}
+        {selected && <Technology
+          onCloseTechnology={onCloseTechnology}
         />}
       </div>
     );
@@ -156,6 +145,7 @@ class Employees extends Component {
     const {
       onSelectEmployee,
       onCloseEmployee,
+      onSelectTechnology,
     } = this.props;
 
     return (
@@ -168,6 +158,7 @@ class Employees extends Component {
         />}
         {this.props.selected && <Employee
           onCloseEmployee={onCloseEmployee}
+          onSelectTechnology={onSelectTechnology}
         />}
       </div>
     )
@@ -239,12 +230,15 @@ class App extends Component {
                 selected={this.state.selectedEmployee}
                 onCloseEmployee={this.onCloseEmployee}
                 onSelectEmployee={this.onSelectEmployee}
+                onSelectTechnology={this.onSelectTechnology}
               />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
-              <Technologies />
+              <Technologies
+                selected={this.state.selectedTechnology}
+              />
             </Paper>
           </Grid>
         </Grid>

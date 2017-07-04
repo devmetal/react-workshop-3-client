@@ -71,11 +71,11 @@ class Project extends Component {
   }
 };
 
-const Employee = ({ onCloseEmployee }) => (
+const Employee = (props) => (
   <div>
     <a
       href="#"
-      onClick={onCloseEmployee}
+      onClick={props.onCloseEmployee}
     >
       Close
         </a>

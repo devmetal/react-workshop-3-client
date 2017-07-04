@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from 'material-ui/styles';
 import registerServiceWorker from './registerServiceWorker';
 
-import App from './App.v8';
+import App from './App.v6';
 import './index.css';
 
 const Root = () => (
