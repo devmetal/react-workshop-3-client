@@ -1,6 +1,4 @@
-import gql from 'graphql-tag';
-
-export default gql`
+export default`
 {
 	projects {
     id
@@ -25,6 +23,10 @@ export default gql`
   technologies {
     id,
     name,
+    usedBy {
+      id,
+      name
+    }
   }
 }
 `;

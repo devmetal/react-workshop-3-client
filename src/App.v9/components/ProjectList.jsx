@@ -7,7 +7,7 @@ export default ({
 }) => (
     <List>
       {!!projects.length && projects.map(project => (
-        <ListItem key={project.id} onClick={() => onSelectProject(project)} button>
+        <ListItem key={project.id} onClick={() => onSelectProject(project.id)} button>
           <ListItemText primary={project.name} />
         </ListItem>
       ))}

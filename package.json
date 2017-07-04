@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "graphql": "^0.10.3",
     "graphql-tag": "^2.4.2",
     "lodash": "^4.17.4",
     "material-ui": "next",
@@ -22,5 +23,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/graphql": {
+      "target": "http://localhost:8080"
+    }
   }
 }

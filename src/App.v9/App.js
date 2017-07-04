@@ -1,4 +1,18 @@
-const styleSheet = createStyleSheet('FullWidthGrid', theme => ({
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import * as Actions from './redux/actions';
+
+import Projects from './Projects';
+import Employees from './Employees';
+import Technologies from './Technologies';
+
+const style = {
   root: {
     flexGrow: 1,
   },
@@ -11,32 +25,17 @@ const styleSheet = createStyleSheet('FullWidthGrid', theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-}));
+}
+
+const styleSheet = createStyleSheet('App', theme => style);
 
 class App extends Component {
   componentDidMount() {
     this.props.init();
   }
 
-  onSelectProject = ({ id }) => this.props.selectProject(id);
-  onCloseProject = () => this.props.closeProject();
-
-  onSelectEmployee = ({ id }) => this.props.selectEmployee(id);
-  onCloseEmployee = () => this.props.closeEmployee();
-
-  onSelectTechnology = ({ id }) => this.props.selectTech(id);
-  onCloseTechnology = () => this.props.closeTech();
-
   render() {
-    const {
-      classes,
-      projects,
-      employees,
-      technologies,
-      selectedProject,
-      selectedEmployee,
-      selectedTechnology,
-    } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>
@@ -50,36 +49,17 @@ class App extends Component {
         <Grid className={classes.container} container gutter={24}>
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
-              <Projects
-                projects={projects}
-                selected={selectedProject}
-                onSelectProject={this.onSelectProject}
-                onSelectEmployee={this.onSelectEmployee}
-                onSelectTechnology={this.onSelectTechnology}
-                onCloseProject={this.onCloseProject}
-              />
+              <Projects />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
-              <Employees
-                employees={employees}
-                selected={selectedEmployee}
-                onSelectEmployee={this.onSelectEmployee}
-                onCloseEmployee={this.onCloseEmployee}
-                onSelectTechnology={this.onSelectTechnology}
-              />
+              <Employees />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
-              <Technologies
-                technologies={technologies}
-                selected={selectedTechnology}
-                onSelectTechnology={this.onSelectTechnology}
-                onCloseTechnology={this.onCloseTechnology}
-                onSelectEmployee={this.onSelectEmployee}
-              />
+              <Technologies />
             </Paper>
           </Grid>
         </Grid>
@@ -88,31 +68,14 @@ class App extends Component {
   }
 }
 
-export default withStyles(styleSheet)(connect(
-  (state) => ({
-    ...state,
-  }),
-  (dispatch) => ({
+const AppWithStyles = withStyles(styleSheet)(App);
+const ConnectedApp = connect(
+  () => ({}),
+  dispatch => ({
     init() {
       dispatch(Actions.init());
     },
-    selectProject(id) {
-      dispatch(Actions.selectProject(id));
-    },
-    closeProject() {
-      dispatch(Actions.closeProject())
-    },
-    selectEmployee(id) {
-      dispatch(Actions.selectEmployee(id));
-    },
-    closeEmployee() {
-      dispatch(Actions.closeEmployee());
-    },
-    selectTech(id) {
-      dispatch(Actions.selectTech(id));
-    },
-    closeTech() {
-      dispatch(Actions.closeTech());
-    }
-  }),
-)(App));
+  })
+)(AppWithStyles);
+
+export default ConnectedApp;

@@ -9,7 +9,7 @@ export default ({ show, onClick }) => {
     <IconButtton
       aria-label="Close"
       style={{ float: 'right' }}
-      onClick={onCloseEmployee}
+      onClick={onClick}
     >
       <CloseIcon />
     </IconButtton>

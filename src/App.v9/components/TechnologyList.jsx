@@ -7,7 +7,7 @@ export default ({
 }) => (
     <List>
       {!!stack.length && stack.map(tech => (
-        <ListItem key={tech.id} onClick={() => onSelectTechnology(tech)} button>
+        <ListItem key={tech.id} onClick={() => onSelectTechnology(tech.id)} button>
           <ListItemText primary={tech.name} />
         </ListItem>
       ))}

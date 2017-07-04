@@ -1,35 +1,54 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Typography from 'material-ui/Typography';
 import Technology from './components/Technology';
 import TechnologyList from './components/TechnologyList';
 import CloseButton from './components/CloseButton';
+import * as Actions from './redux/actions';
 
-export default class extends Component {
+class Technologies extends Component {
   render() {
     const {
-      onSelectTechnology,
-      onCloseTechnology,
-      onSelectEmployee,
+      selectTechnology,
+      closeTechnology,
+      selectEmployee,
       selected,
       technologies,
     } = this.props;
 
     return (
       <div>
-        <CloseButton show={selected} onClick={onCloseTechnology} />
+        <CloseButton show={selected} onClick={closeTechnology} />
         <Typography type="headline" gutterBottom>
           Technologies
         </Typography>
         {!selected && <TechnologyList
           stack={technologies}
-          onSelectTechnology={onSelectTechnology}
+          onSelectTechnology={selectTechnology}
         />}
         {selected && <Technology
-          onCloseTechnology={onCloseTechnology}
-          onSelectEmployee={onSelectEmployee}
+          onSelectEmployee={selectEmployee}
           technology={selected}
         />}
       </div>
     );
   }
 }
+
+export default connect(
+  state => ({
+    technologies: state.technologies,
+    selected: state.selectedTechnology,
+  }),
+  dispatch => ({
+    selectTechnology(id) {
+      dispatch(Actions.selectTech(id));
+    },
+    selectEmployee(id) {
+      dispatch(Actions.selectEmployee(id));
+    },
+    closeTechnology() {
+      dispatch(Actions.closeTech());
+    }
+  })
+)(Technologies);

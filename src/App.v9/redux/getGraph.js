@@ -2,5 +2,5 @@ import axios from 'axios';
 
 const headers = { 'Content-Type': 'application/graphql' };
 
-export default payload => axios.post('/graphql', payload, { headers })
-  .then(resp => res.data);
+export default query => axios.get('/graphql', { headers, params: { query } })
+  .then(resp => resp.data);

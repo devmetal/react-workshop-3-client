@@ -20,10 +20,11 @@ const addTechs = techs => ({ type: ADD_TECHS, payload: techs });
 export function init() {
   return function (dispatch) {
     return getDashboard()
-      .then((datas) => {
-        dispatch(addProjects(datas.projects));
-        dispatch(addEmployees(datas.employees));
-        dispatch(addTechs(datas.technologies));
+      .then((res) => {
+        const { data } = res;
+        dispatch(addProjects(data.projects));
+        dispatch(addEmployees(data.employees));
+        dispatch(addTechs(data.technologies));
       })
       .catch(err => console.error(err));
   }
@@ -44,7 +45,7 @@ export const selectEmployee = (id) => (dispatch, getState) => {
 export const selectTech = (id) => (dispatch, getState) => {
   const { technologies } = getState();
   const technology = technologies.find(t => t.id === id);
-  dispatch({ type: USER_SELECT_TECH, payload, technology });
+  dispatch({ type: USER_SELECT_TECH, payload: technology });
 };
 
 export const closeProject = () => ({
