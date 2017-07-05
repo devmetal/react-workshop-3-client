@@ -48,7 +48,7 @@ export default connect(
       dispatch(Actions.selectTech(id));
     },
     closeEmployee(id) {
-      dispatch(Actions.selectEmployee(id));
+      dispatch(Actions.closeEmployee());
     },
   })
 )(Employees)
