@@ -21,7 +21,7 @@ class Projects extends Component {
       <div>
         <CloseButton show={selected} onClick={closeProject} />
         <Typography type="headline" gutterBottom>
-          { (selected) ? selected.name : 'Projects' }
+          Projects
         </Typography>
         {!selected && <ProjectList
           projects={projects}
@@ -38,22 +38,6 @@ class Projects extends Component {
 }
 
 export default connect(
-  state => ({
-    projects: state.projects,
-    selected: state.selectedProject,
-  }),
-  dispatch => ({
-    selectProject(id) {
-      dispatch(Actions.selectProject(id));
-    },
-    selectEmployee(id) {
-      dispatch(Actions.selectEmployee(id));
-    },
-    selectTechnology(id) {
-      dispatch(Actions.selectTech(id));
-    },
-    closeProject() {
-      dispatch(Actions.closeProject());
-    },
-  }),
+  state => ({}),
+  dispatch => ({}),
 )(Projects);

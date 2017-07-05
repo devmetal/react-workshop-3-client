@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
+import Typography from 'material-ui/Typography';
 import EmployeeList from './EmployeeList';
 
 export default ({
@@ -7,7 +7,13 @@ export default ({
   technology
 }) => (
     <div>
-      <Avatar alt={technology.name} src={technology.logo} />
+      <Typography type="title">
+        {technology.name}
+      </Typography>
+      <Typography type="body1">
+        Technology description
+      </Typography>
+      <hr />
       <EmployeeList employees={technology.usedBy} onSelectEmployee={onSelectEmployee} />
     </div>
   );

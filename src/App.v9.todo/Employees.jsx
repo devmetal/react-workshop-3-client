@@ -20,7 +20,7 @@ class Employees extends Component {
       <div>
         <CloseButton show={selected} onClick={closeEmployee} />
         <Typography type="headline" gutterBottom>
-          { (selected) ? selected.name : 'Employees' }
+          Employees
         </Typography>
         {!selected && <EmployeeList
           employees={employees}
@@ -36,19 +36,6 @@ class Employees extends Component {
 }
 
 export default connect(
-  state => ({
-    employees: state.employees,
-    selected: state.selectedEmployee,
-  }),
-  dispatch => ({
-    selectEmployee(id) {
-      dispatch(Actions.selectEmployee(id));
-    },
-    selectTechnology(id) {
-      dispatch(Actions.selectTech(id));
-    },
-    closeEmployee(id) {
-      dispatch(Actions.closeEmployee());
-    },
-  })
+  state => ({}),
+  dispatch => ({})
 )(Employees)

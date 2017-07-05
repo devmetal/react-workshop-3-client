@@ -19,8 +19,8 @@ class Technologies extends Component {
     return (
       <div>
         <CloseButton show={selected} onClick={closeTechnology} />
-        <Typography type="headline">
-          { (selected) ? selected.name : 'Technologies' }
+        <Typography type="headline" gutterBottom>
+          Technologies
         </Typography>
         {!selected && <TechnologyList
           stack={technologies}
@@ -36,19 +36,6 @@ class Technologies extends Component {
 }
 
 export default connect(
-  state => ({
-    technologies: state.technologies,
-    selected: state.selectedTechnology,
-  }),
-  dispatch => ({
-    selectTechnology(id) {
-      dispatch(Actions.selectTech(id));
-    },
-    selectEmployee(id) {
-      dispatch(Actions.selectEmployee(id));
-    },
-    closeTechnology() {
-      dispatch(Actions.closeTech());
-    }
-  })
+  state => ({}),
+  dispatch => ({})
 )(Technologies);

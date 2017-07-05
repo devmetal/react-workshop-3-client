@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MuiThemeProvider } from 'material-ui/styles';
 import EditableName from '../EditableName'
 
 describe('Editable name component', () => {
@@ -8,25 +7,42 @@ describe('Editable name component', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <MuiThemeProvider>
-        <EditableName title="Test" />
-      </MuiThemeProvider>
+      <EditableName title="Test" />
     );
   })
 
-  it('Present the Typography tag with content of title', () => {
-    expect(wrapper.find('Typography')).toHaveText('Test');
+  it('Present the h1 tag with content of title', () => {
+    expect(wrapper.find('h1')).toHaveText('Test');
   });
 
   describe('Editing', () => {
-    describe('Click on Typography tag', () => {
+    describe('Click on h1 tag', () => {
       beforeEach(() => {
-        wrapper.find('Typography').simulate('click');
+        wrapper.find('h1').simulate('click');
       })
 
-      it('the input appear instead of Typography', () => {
-        expect(wrapper.find('Typography')).not.toBePresent();
+      it('input tag visible instead of h1', () => {
+        expect(wrapper.find('h1')).not.toBePresent();
         expect(wrapper.find('input')).toBePresent();
+      });
+
+      it('done button appear', () => {
+        expect(wrapper.find('.done')).toBePresent();
+      });
+    });
+
+    describe('Press done button', () => {
+      beforeAll(() => {
+        wrapper.find('.done').simulate('click');
+      })
+
+      it('h1 tag visible instead of input', () => {
+        expect(wrapper.find('h1')).toBePresent();
+        expect(wrapper.find('input')).not.toBePresent();
+      });
+
+      it('done button disappear', () => {
+        expect(wrapper.find('.done')).not.toBePresent();
       });
     });
   });
